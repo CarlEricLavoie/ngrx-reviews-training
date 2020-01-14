@@ -1,0 +1,10 @@
+<form [formGroup]="reviewForm" (ngSubmit)="addReview()">
+  <span *ngIf="reviewForm.get('rating').invalid" class="error-message">
+    Invalid rating
+  </span>
+  <div class="form-group">
+    <input type="number" formControlName="rating" min="0" max="5" required>
+    <button type="submit">submit</button>
+  </div>
+</form>
+<app-review-list></app-review-list>
