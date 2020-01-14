@@ -1,7 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Review} from "../../models/review";
-import {ReviewService} from "../../services/review.service";
 import {Observable} from "rxjs";
+import * as fromReview from "../..";
+import {AppState} from "../../reducers/review.reducer";
+import {select, Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-review-list',
@@ -12,16 +14,16 @@ export class ReviewListComponent implements OnInit {
 
   public $reviews : Observable<Review[]>;
 
-  constructor(private reviewService: ReviewService) {
+  constructor(private store : Store<AppState>) {
 
   }
 
   deleteReview(review : Review){
-    this.reviewService.removeReview(review);
+    this.store.dispatch(fromReview.RemoveReview(review));
   }
 
   ngOnInit() {
-    this.$reviews = this.reviewService.getReviews();
+    this.$reviews = this.store.pipe(select(fromReview.selectReviews));
   }
 
 }

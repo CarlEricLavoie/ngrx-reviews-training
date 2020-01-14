@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ReviewService} from "../../services/review.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Store} from "@ngrx/store";
+import * as fromReview from "../../";
 
 @Component({
   selector: 'app-reviews',
@@ -10,7 +11,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class ReviewsComponent implements OnInit {
   public reviewForm : FormGroup;
 
-  constructor(private reviewService: ReviewService, private formBuilder: FormBuilder) {
+  constructor(private store : Store<fromReview.State>, private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
@@ -21,7 +22,8 @@ export class ReviewsComponent implements OnInit {
 
   addReview(){
     if(this.reviewForm.valid){
-      this.reviewService.addReview(this.reviewForm.value.rating);
+      const rating = this.reviewForm.value.rating;
+      this.store.dispatch(fromReview.AddReview({rating}));
       this.reviewForm.reset({
         rating : 5
       });

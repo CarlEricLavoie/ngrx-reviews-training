@@ -12,7 +12,7 @@ import * as fromReview from './reducers/review.reducer';
 
 @NgModule({
   declarations: [ReviewsComponent, ReviewComponent, ReviewListComponent],
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule, StoreModule.forFeature(fromReview.featureKey, fromReview.reducer)],
   exports: [ReviewsComponent]
 })
 export class ReviewsModule { }
