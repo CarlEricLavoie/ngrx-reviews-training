@@ -18,8 +18,10 @@ export const initialState: State = {
 
 const reviewReducer = createReducer<State>(
   initialState,
-  on(ReviewActions.AddReview, (state, {rating}) => ({ ...state, reviews : state.reviews.concat({rating, id : Date.now()}) })),
-  on(ReviewActions.RemoveReview, (state,{id}) => ({ ...state, reviews: state.reviews.filter(r => r.id !== id) })));
+  on(ReviewActions.AddReviewSuccessful, (state, {rating}) => ({ ...state, reviews : state.reviews.concat({rating, id : Date.now()}) })),
+  on(ReviewActions.RemoveReviewSuccessful, (state,{id}) => ({ ...state, reviews: state.reviews.filter(r => r.id !== id) })),
+  on(ReviewActions.LoadReviewsSuccessful, (state, {reviews }) => ({...state, reviews}))
+);
 
 export function reducer(state: State | undefined, action: Action) {
   return reviewReducer(state, action);

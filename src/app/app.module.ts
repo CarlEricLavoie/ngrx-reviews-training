@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import {ReviewsModule} from "./reviews/reviews.module";
 import {StoreModule} from "@ngrx/store";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
+import {EffectsModule} from "@ngrx/effects";
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import {StoreDevtoolsModule} from "@ngrx/store-devtools";
     AppComponent
   ],
   imports: [
+    EffectsModule.forRoot([]),
     StoreModule.forRoot({}),
     BrowserModule,
     ReviewsModule,

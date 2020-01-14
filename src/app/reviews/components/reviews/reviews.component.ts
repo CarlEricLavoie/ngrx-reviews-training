@@ -17,7 +17,9 @@ export class ReviewsComponent implements OnInit {
   ngOnInit() {
     this.reviewForm = this.formBuilder.group({
       rating : ['5', Validators.max(5)]
-    })
+    });
+
+    this.store.dispatch(fromReview.LoadReviews());
   }
 
   addReview(){
